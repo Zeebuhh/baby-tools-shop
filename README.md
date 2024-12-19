@@ -48,5 +48,6 @@ This section will cover some hot tips when trying to interacting with this repos
 -push changes to github
 -go to vm via ssh key
 -clone repository to vm
--docker build
+-docker build: docker build -t baby-tools-shop -f Dockerfile .
+-check if worked: docker run -it --rm -p 4321:5000 baby-tools-shop
 -docker run
