@@ -14,4 +14,4 @@ RUN python -m pip install -r requirements.txt
 EXPOSE 5000
 
 # This is the command that will be executed on container launch
-ENTRYPOINT ["sh", "-c", "cd babyshop_app && python manage.py migrate && python manage.py runserver 159.69.20.89:5000"]
+ENTRYPOINT ["sh", "-c", "cd babyshop_app && python manage.py migrate && python manage.py runserver 0.0.0.0:5000"]
