@@ -130,9 +130,23 @@ This repository hosts an e-commerce project tailored for baby products. It is de
    docker build -t {project_name} -f Dockerfile .
    ```
 4. **Run the container:**
+
    ```bash
    docker run -it --rm -p 8025:8025 {project_name}
    ```
+
+   **Hint:** Use the `-v` flag with `docker run` to persist data and avoid data loss across restarts. For example:
+
+   ```bash
+   docker run -d -p 8025:8025 --restart on-failure \
+     -v /path/on/host/static:/app/static \
+     -v /path/on/host/media:/app/media \
+     -v /path/on/host/.env:/app/.env \
+     {project_name}
+   ```
+
+   - The `-v` flag ensures that important directories like `static`, `media`, and `.env` are linked to persistent storage on the host.
+   - The `--restart on-failure` option ensures that the container restarts automatically if it crashes.
 
 ### Deployment on Virtual Machine
 
