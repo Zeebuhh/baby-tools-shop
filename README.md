@@ -167,6 +167,8 @@ This repository hosts an e-commerce project tailored for baby products. It is de
    -v /baby-tools-shop/.env:/app/.env \
    baby-tools-shop
    ```
+5. **Access Apllication**
+   Access the application: Open your browser and navigate to http://{vmip}:8025/
 
 ## Technologies Used
 
