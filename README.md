@@ -162,11 +162,10 @@ This repository hosts an e-commerce project tailored for baby products. It is de
    ```
 4. **Run the container:**
    ```bash
-   docker run -d --restart always -p {host_port}:{container_port} \
-     -v /path/on/vm/static:/app/static \
-     -v /path/on/vm/media:/app/media \
-     -v /path/on/vm/.env:/app/.env \
-     {project_name}
+   docker run -d --restart on-failure -p 8025:8025 \
+   -v /baby-tools-shop/project_images:/app/project_images \
+   -v /baby-tools-shop/.env:/app/.env \
+   baby-tools-shop
    ```
 
 ## Technologies Used
