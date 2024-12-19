@@ -41,6 +41,11 @@ This section will cover some hot tips when trying to interacting with this repos
 
 ###### OWN STEPS
 
+-Fork Project
+-Clone Repo
+-Create venv with specific python version
+-start env
+-load requirements
 -create Dockerfile in Project
 -details of dockerfile
 -requirements.txt file
