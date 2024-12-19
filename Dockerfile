@@ -1,5 +1,5 @@
 # This is the base image of our application image
-FROM python:3.12.8
+FROM python:3.9
 
 # This is a special directory variable, that can be used to encapsulate 
 # all application/container specific files/assets into a separate folder on the system.
@@ -11,7 +11,7 @@ COPY . $WORKDIR
 # Install all dependencies for the application that lives in the container
 RUN python -m pip install -r requirements.txt
 
-EXPOSE 5000
+EXPOSE 8025
 
 # This is the command that will be executed on container launch
 ENTRYPOINT ["sh", "-c", "cd babyshop_app && python manage.py migrate && python manage.py runserver 0.0.0.0:8025"]

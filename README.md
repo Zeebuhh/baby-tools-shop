@@ -46,9 +46,9 @@ This section will cover some hot tips when trying to interacting with this repos
 -Create venv with specific python version
 -start env
 -load requirements
+-test runserver
 -create Dockerfile in Project
 -details of dockerfile
--requirements.txt file
 -dockerignore file
 -push changes to github
 -go to vm via ssh key
