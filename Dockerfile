@@ -9,7 +9,7 @@ WORKDIR /app
 COPY . $WORKDIR
 
 # Copy the .env file into the container
-COPY .env $WORKDIR/.env
+COPY ../.env $WORKDIR/.env
 
 # Install all dependencies for the application that lives in the container
 RUN python -m pip install -r requirements.txt
