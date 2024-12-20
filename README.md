@@ -38,7 +38,14 @@ This repository hosts an e-commerce project tailored for baby products. It is de
    ```bash
    cd {project_directory}
    python -m venv env
-   source env/bin/activate  # On Windows: `env\Scripts\activate`
+   ```
+   **On Windows:**
+   ```
+   `env\Scripts\activate`
+   ```
+   **On MacOS/Linux:**
+   ```
+   source env/bin/activate
    ```
 3. **Install dependencies:**
    ```bash
@@ -51,8 +58,9 @@ This repository hosts an e-commerce project tailored for baby products. It is de
    DEBUG=True
    ALLOWED_HOSTS=localhost,127.0.0.1
    ```
-5. **Run database migrations:**
+5. **Run and make database migrations:**
    ```bash
+   pyhton manage.py makemigrations
    python manage.py migrate
    ```
 6. **Start the development server:**
@@ -72,11 +80,22 @@ This repository hosts an e-commerce project tailored for baby products. It is de
 ### Running the Application
 
 1. **Activate virtual environment:**
-   ```bash
-   source env/bin/activate  # On Windows: `env\Scripts\activate`
+
+   **On Windows:**
+
    ```
+   `env\Scripts\activate`
+   ```
+
+   **On MacOS/Linux:**
+
+   ```
+   source env/bin/activate
+   ```
+
 2. **Run migrations and start the server:**
    ```bash
+   python manage.py makemigrations
    python manage.py migrate
    python manage.py runserver
    ```
@@ -94,7 +113,8 @@ This repository hosts an e-commerce project tailored for baby products. It is de
    WORKDIR /app
 
    # Copy the project files from the host machine to the container
-   COPY . /app
+   COPY babyshop_app /app
+   COPY requirements.txt /app
 
    # Install project dependencies specified in requirements.txt
    RUN pip install -r requirements.txt
@@ -103,14 +123,15 @@ This repository hosts an e-commerce project tailored for baby products. It is de
    EXPOSE 8025
 
    # Define the command to run the application
-   ENTRYPOINT ["sh", "-c", "cd {project_directory} && python manage.py migrate && python manage.py runserver 0.0.0.0:8025"]
+   ENTRYPOINT ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8025"]
    ```
 
    **Explanation of each line:**
 
    - `FROM python:3.9`: Specifies the base image. This is an official Python image with version 3.9 installed.
    - `WORKDIR /app`: Sets the working directory inside the container to `/app`. All subsequent commands will run in this directory.
-   - `COPY . /app`: Copies all the files from the project directory on the host machine to the `/app` directory in the container.
+   - `COPY babyshop_app /app`: Copies all the files from the babyshop_app project directory on the host machine to the `/app` directory in the container.
+   - `COPY requirements.txt /app`: Copies all the files from the babyshop_app project directory on the host machine to the `/app` directory in the container.
    - `RUN pip install -r requirements.txt`: Installs all Python dependencies listed in `requirements.txt`.
    - `EXPOSE 8025`: Indicates that the application will run on port 8025 and makes this port accessible to the host system.
    - `ENTRYPOINT`: Defines the command to start the application. It ensures database migrations are applied and then starts the Django development server, binding it to all network interfaces (`0.0.0.0`).
@@ -136,8 +157,10 @@ This repository hosts an e-commerce project tailored for baby products. It is de
    ```bash
    docker run -d --restart on-failure -p 8025:8025 \
    -v /baby-tools-shop/project_images:/app/project_images \
-   -v /baby-tools-shop/.env:/app/.env \
+   -v /babyshop_db:/app/db \
+   -v /babyshop_app/.env:/app/.env \
    baby-tools-shop
+
    ```
 
    - The `-v` flag ensures that important directories like `project_images` are linked to persistent storage on the host.
@@ -160,7 +183,8 @@ This repository hosts an e-commerce project tailored for baby products. It is de
    ```bash
    docker run -d --restart on-failure -p 8025:8025 \
    -v /baby-tools-shop/project_images:/app/project_images \
-   -v /baby-tools-shop/.env:/app/.env \
+   -v /babyshop_db:/app/db \
+   -v /babyshop_app/.env:/app/.env \
    baby-tools-shop
    ```
 5. **Access Apllication**
