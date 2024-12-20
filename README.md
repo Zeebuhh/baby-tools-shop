@@ -119,10 +119,6 @@ This repository hosts an e-commerce project tailored for baby products. It is de
 
    - **Customizing Ports:** Modify `EXPOSE` and the `runserver` port in `ENTRYPOINT` to use a different port if needed.
    - **Environment Variables:** Use a `COPY` command to include the `.env` file or configure them in your deployment environment.
-   - **Static Files:** Add commands to collect static files if deploying to a production environment:
-     ```dockerfile
-     RUN python manage.py collectstatic --noinput
-     ```
    - **Database Configuration:** Update the `DATABASES` setting in `settings.py` to use a production database like PostgreSQL or MySQL.
 
 3. **Build the Docker image:**
@@ -138,15 +134,15 @@ This repository hosts an e-commerce project tailored for baby products. It is de
    **Hint:** Use the `-v` flag with `docker run` to persist data and avoid data loss across restarts. For example:
 
    ```bash
-   docker run -d -p 8025:8025 --restart on-failure \
-     -v /path/on/host/static:/app/static \
-     -v /path/on/host/media:/app/media \
-     -v /path/on/host/.env:/app/.env \
-     {project_name}
+   docker run -d --restart on-failure -p 8025:8025 \
+   -v /baby-tools-shop/project_images:/app/project_images \
+   -v /baby-tools-shop/.env:/app/.env \
+   baby-tools-shop
    ```
 
-   - The `-v` flag ensures that important directories like `static`, `media`, and `.env` are linked to persistent storage on the host.
+   - The `-v` flag ensures that important directories like `project_images` are linked to persistent storage on the host.
    - The `--restart on-failure` option ensures that the container restarts automatically if it crashes.
+   - The `-d` flag stands for detached mode, not showing terminal statements
 
 ### Deployment on Virtual Machine
 
